@@ -37,7 +37,7 @@
     <div id="content-wrapper">
 
       <div class="container-fluid">
-      <h3 style="padding-bottom: 10px;">Barang</h3>
+      <h3 style="padding-bottom: 10px;">Master Barang</h3>
       <a href="master_barang_tambah.php" style="color:white"><button class="btn btn-success">Tambah</button></a>
         <!-- DataTables Example -->
         <div class="card mb-3" style="margin-top: 10px">
@@ -52,6 +52,12 @@
                     <th>No</th>
                     <th>Kode Barang</th>
                     <th>Barang</th>
+                    <th>Jenis Barang</th>
+                    <th>Merk</th>
+                    <th>Satuan</th>
+                    <th>Deskripsi</th>
+                    <th>Harga</th>
+                    <th>Keterangan</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -60,19 +66,40 @@
                     <th>No</th>
                     <th>Kode Barang</th>
                     <th>Barang</th>
+                    <th>Jenis Barang</th>
+                    <th>Merk</th>
+                    <th>Satuan</th>
+                    <th>Deskripsi</th>
+                    <th>Harga</th>
+                    <th>Keterangan</th>
                     <th></th>
                   </tr>
                 </tfoot>
                 <tbody>
+                  <?php
+                    require_once("model/tampil_master_barang.php");
+                    $no = 1 ;
+                    while($d = mysqli_fetch_array($data)){
+                  ?>
                   <tr>
-                    <td>1</td>
-                    <td>kode-001</td>
-                    <td>Cat</td>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $d['kode_barang']; ?></td>
+                    <td><?php echo $d['barang']; ?></td>
+                    <td><?php echo $d['jenis_barang']; ?></td>
+                    <td><?php echo $d['merk']; ?></td>
+                    <td><?php echo $d['satuan']; ?></td>
+                    <td><?php echo $d['deskripsi']; ?></td>
+                    <td><?php echo number_format($d['harga'],2,",","."); ?></td>
+                    <td><?php echo $d['keterangan']; ?></td>
                     <td align="center">
-                        <button type="submit" class="btn btn-warning">Ubah</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <a href="master_barang_edit.php?kode_barang=<?php echo $d['kode_barang']; ?>" style="color: white"><button class="btn btn-warning">Ubah</button></a>
+                        
+                        <a href="model/hapus_master_barang.php?kode_barang=<?php echo $d['kode_barang']; ?>" style="color: white"><button class="btn btn-danger">Hapus</button></a>
                     </td>
                   </tr>
+                  <?php
+                    }
+                  ?>
                 </tbody>
               </table>
             </div>

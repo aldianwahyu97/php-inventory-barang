@@ -1,6 +1,6 @@
 <?php 
 
-$koneksi = mysqli_connect("localhost","root","","db_jb_paint");
+$koneksi = mysqli_connect("localhost","root","","db_jb_paint2");
 
 // Check connection
 if (mysqli_connect_errno()){

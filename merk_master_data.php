@@ -64,15 +64,23 @@
                   </tr>
                 </tfoot>
                 <tbody>
+                <?php
+                  require_once("model/tampil_merk.php");
+                  $no = 1 ;
+                  while($d = mysqli_fetch_array($data)){
+                ?>
                   <tr>
-                    <td>1</td>
-                    <td>kode-001</td>
-                    <td>Cat</td>
+                    <td><?php echo $no++; ?></td>
+                    <td><?php echo $d['kode_merk']; ?></td>
+                    <td><?php echo $d['nama_merk']; ?></td>
                     <td align="center">
-                        <button type="submit" class="btn btn-warning">Ubah</button>
-                        <button type="submit" class="btn btn-danger">Hapus</button>
+                        <a href="merk_master_data_edit.php?kode_merk=<?php echo $d['kode_merk']; ?>" style="color: white"><button class="btn btn-warning">Ubah</button></a>
+                        <a href="model/hapus_merk.php?kode_merk=<?php echo $d['kode_merk']; ?>" style="color: white"><button class="btn btn-danger">Hapus</button></a>
                     </td>
                   </tr>
+                  <?php
+                    }
+                  ?>
                 </tbody>
               </table>
             </div>

@@ -37,38 +37,47 @@
     <div id="content-wrapper">
         
       <div class="container-fluid">
-      <h3 style="padding-bottom: 10px;">Tambah Barang</h3>
+      <h3 style="padding-bottom: 10px;">Edit Barang</h3>
       <a href="master_barang.php" style="color:white" style="padding-bottom: 10px;"><button class="btn btn-primary" >Kembali</button></a> <br><br>
         <div class="card">
-            <div class="card-header">Tambah Barang</div>
+            <div class="card-header">Edit Barang</div>
             <div class="card-body">
-                <form action="model/aksi_tambah_master_barang.php" method="POST">
+                <?php
+                    include 'model/koneksi.php';
+                    $kode_barang = $_GET['kode_barang'];
+                    $data = mysqli_query($koneksi,"SELECT * FROM `data_barang` WHERE kode_barang='$kode_barang'");
+                    while($d = mysqli_fetch_array($data)){
+                ?>
+                <form action="model/aksi_ubah_master_barang.php" method="POST">
+                        <input type="hidden" name="kode_barang" value="<?php echo $d['kode_barang'] ?>">
                     <div class="form-group">
                         <label for="kode_barang"><b>Kode Barang:</b></label>
-                        <input type="text" class="form-control" placeholder="Masukkan Kode Barang" name="kode_barang">
+                        <input type="text" class="form-control" placeholder="Masukkan Kode Barang" name="kode_barang_ubah" value="<?php echo  $d['kode_barang'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="nama_barang"><b>Nama Barang:</b></label>
-                        <input type="text" class="form-control" placeholder="Masukkan Nama Barang" name="barang">
+                        <input type="text" class="form-control" placeholder="Masukkan Nama Barang" name="barang" value="<?php echo $d['barang'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="comment"><b>Deskripsi:</b></label>
-                        <textarea name="deskripsi" class="form-control" rows="5" id="comment"></textarea>
+                        <textarea name="deskripsi" class="form-control" rows="5" id="comment"><?php echo $d['deskripsi'] ?></textarea>
                     </div>
+
                     <div class="form-group">
                         <label for="harga_barang"><b>Harga Barang:</b></label>
-                        <input type="text" class="form-control" placeholder="Masukkan Harga Barang" name="harga">
+                        <input type="text" class="form-control" placeholder="Masukkan Harga Barang" name="harga" value="<?php echo $d['harga'] ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="keterangan_barang"><b>Keterangan:</b></label>
-                        <input type="text" class="form-control" placeholder="Masukkan Keterangan Barang" name="keterangan">
+                        <input type="text" class="form-control" placeholder="Masukkan Keterangan Barang" name="keterangan" value="<?php echo $d['keterangan'] ?>">
                     </div>
+
                     <div class="form-group">
                         <label for="sel1"><b>Jenis Barang:</b></label>
-                        <select class="form-control" name="jenis_barang">
+                        <select class="form-control" name="jenis_barang" value="<?php echo $d['jenis_barang'] ?>">
                             <?php
-                              require_once("model/koneksi.php");
+                              include("model/koneksi.php");
                               $data = mysqli_query($koneksi,"select jenis_barang from jenis_barang");
                               while($d = mysqli_fetch_array($data)){
                             ?>
@@ -80,9 +89,9 @@
                     </div>
                     <div class="form-group">
                         <label for="merk"><b>Merk:</b></label> <br>
-                        <select class="form-control" name="merk">
+                        <select class="form-control" name="merk" value="<?php echo $d['merk'] ?>">
                             <?php
-                              require_once("model/koneksi.php");
+                              include("model/koneksi.php");
                               $data = mysqli_query($koneksi,"select nama_merk from merk");
                               while($d = mysqli_fetch_array($data)){
                             ?>
@@ -95,9 +104,9 @@
                     </div>
                     <div class="form-group">
                         <label for="jenis_barang"><b>Satuan:</b></label> <br>
-                        <select class="form-control" name="satuan">
+                        <select class="form-control" name="satuan" value="<?php echo $d['satuan'] ?>">
                             <?php
-                              require_once("model/koneksi.php");
+                              include("model/koneksi.php");
                               $data = mysqli_query($koneksi,"select nama_satuan from satuan");
                               while($d = mysqli_fetch_array($data)){
                             ?>
@@ -107,8 +116,12 @@
                             ?>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-success">Tambah</button>
+                    
+                    <button type="submit" class="btn btn-success">Edit</button>
                 </form>
+                <?php 
+                    }
+                ?>
             </div>
             <div class="card-footer"></div>
         </div>  

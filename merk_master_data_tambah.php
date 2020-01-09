@@ -42,14 +42,14 @@
         <div class="card">
             <div class="card-header">Tambah Merk</div>
             <div class="card-body">
-                <form action="/action_page.php">
+                <form action="model/aksi_tambah_merk.php" method="POST">
                     <div class="form-group">
                         <label for="kode_merk">Kode Merk:</label>
                         <input type="text" class="form-control" placeholder="Masukkan Kode Merk" name="kode_merk">
                     </div>
                     <div class="form-group">
-                        <label for="jenis_merk">Jenis Merk:</label>
-                        <input type="text" class="form-control" placeholder="Masukkan Jenis Merk" name="jenis_merk">
+                        <label for="merk">Jenis Merk:</label>
+                        <input type="text" class="form-control" placeholder="Masukkan Jenis Merk" name="merk">
                     </div>
                     <button type="submit" class="btn btn-success">Tambah</button>
                 </form>

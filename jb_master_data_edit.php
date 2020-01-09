@@ -35,59 +35,37 @@
     ?>
 
     <div id="content-wrapper">
-
+        
       <div class="container-fluid">
-      <h3 style="padding-bottom: 10px;">Jenis Barang</h3>
-      <a href="jb_master_data_tambah.php" style="color:white"><button class="btn btn-success">Tambah</button></a>
-        <!-- DataTables Example -->
-        <div class="card mb-3" style="margin-top: 10px">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Data Barang</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Kode Jenis Barang</th>
-                    <th>Jenis Barang</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>No</th>
-                    <th>Kode Jenis Barang</th>
-                    <th>Jenis Barang</th>
-                    <th></th>
-                  </tr>
-                </tfoot>
-                <tbody>
+      <h3 style="padding-bottom: 10px;">Edit Jenis Barang</h3>
+      <a href="jb_master_data.php" style="color:white" style="padding-bottom: 10px;"><button class="btn btn-primary" >Kembali</button></a> <br><br>
+        <div class="card">
+            <div class="card-header">Edit Jenis Barang</div>
+            <div class="card-body">
                 <?php
-                  require_once("model/tampil_jenis_barang.php");
-                  $no = 1 ;
-                  while($d = mysqli_fetch_array($data)){
+                    include 'model/koneksi.php';
+                    $kode_jenis_barang = $_GET['kode_jenis_barang'];
+                    $data = mysqli_query($koneksi,"select * from jenis_barang where kode_jenis_barang='$kode_jenis_barang'");
+                    while($d = mysqli_fetch_array($data)){
                 ?>
-                  <tr>
-                    <td><?php echo $no++; ?></td>
-                    <td><?php echo $d['kode_jenis_barang']; ?></td>
-                    <td><?php echo $d['jenis_barang']; ?></td>
-                    <td align="center">
-                      <a href="jb_master_data_edit.php?kode_jenis_barang=<?php echo $d['kode_jenis_barang']; ?>" style="color: white"><button class="btn btn-warning">Ubah</button></a>
-                        
-                      <a href="model/hapus_jenis_barang.php?kode_jenis_barang=<?php echo $d['kode_jenis_barang']; ?>" style="color: white"><button class="btn btn-danger">Hapus</button></a>
-                    </td>
-                  </tr>
-                  <?php
+                <form action="model/aksi_ubah_jenis_barang.php" method="POST">
+                    <input type="hidden" name="kode_jenis_barang" value="<?php echo $d['kode_jenis_barang']; ?>">
+                    <div class="form-group">
+                        <label for="kode_jenis_barang_ubah">Kode Jenis Barang:</label>
+                        <input type="text" class="form-control" placeholder="Masukkan Kode Jenis Barang" name="kode_jenis_barang_ubah" value="<?php echo $d['kode_jenis_barang']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="jenis_barang">Jenis Barang:</label>
+                        <input type="text" class="form-control" placeholder="Masukkan Jenis Barang" name="jenis_barang" value="<?php echo $d['jenis_barang']; ?>">
+                    </div>
+                    <button type="submit" class="btn btn-success">Tambah</button>
+                </form>
+                <?php 
                     }
-                  ?>
-                </tbody>
-              </table>
+                ?>
             </div>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
+            <div class="card-footer"></div>
+        </div>  
       </div>
       <!-- /.container-fluid -->
       <!-- Sticky Footer -->

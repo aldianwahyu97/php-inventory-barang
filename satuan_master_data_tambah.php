@@ -42,14 +42,14 @@
         <div class="card">
             <div class="card-header">Tambah Satuan</div>
             <div class="card-body">
-                <form action="/action_page.php">
+                <form action="model/aksi_tambah_satuan.php" method="POST">
                     <div class="form-group">
                         <label for="kode_satuan">Kode Satuan:</label>
                         <input type="text" class="form-control" placeholder="Masukkan Kode Satuan" name="kode_satuan">
                     </div>
                     <div class="form-group">
-                        <label for="jenis_satuan">Jenis Satuan:</label>
-                        <input type="text" class="form-control" placeholder="Masukkan Jenis Satuan" name="jenis_satuan">
+                        <label for="satuan">Jenis Satuan:</label>
+                        <input type="text" class="form-control" placeholder="Masukkan Jenis Satuan" name="satuan">
                     </div>
                     <button type="submit" class="btn btn-success">Tambah</button>
                 </form>
